@@ -18,7 +18,7 @@ const setLocalStorage = (items) => {
   localStorage.setItem("list", JSON.stringify(items));
 };
 
-const defaultList = JSON.parse(localStorage.getItem('list') || '[]')
+const defaultList = JSON.parse(localStorage.getItem("list") || "[]");
 
 const App = () => {
   const [items, setItems] = useState(defaultList);
@@ -40,21 +40,30 @@ const App = () => {
     setLocalStorage(newItems);
   };
 
-  const editItem = (itemId) => {
-    const newItems = items.map((item) => {
-      if (item.id === itemId) {
-        const newItem = {...item, completed: !item.completed}
-        return newItem
-      }      
-    })
-    setItems(newItems);
-    setLocalStorage(newItems);
-  }
+  const editItem = (clickedItem) => {
+    const updated = setItems([
+      ...items.filter((x) => {
+        return x.id != clickedItem.id;
+      }),
+      { ...clickedItem, completed: !clickedItem.completed },
+    ]);
+
+    setLocalStorage(updated);
+
+    // const newItems = items.map((item) => {
+    //   if (item.id === itemId) {
+    //     const newItem = {...item, completed: !item.completed}
+    //     return newItem
+    //   }
+    // })
+    // setItems(newItems);
+    // setLocalStorage(newItems);
+  };
 
   return (
     <section className="section-center">
       <Form addItem={addItem} />
-      <Items items={items} removeItem={removeItem} editItem={editItem}/>
+      <Items items={items} removeItem={removeItem} editItem={editItem} />
     </section>
   );
 };

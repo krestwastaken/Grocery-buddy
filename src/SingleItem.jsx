@@ -1,12 +1,13 @@
 
 const SingleItem = ({ item, removeItem, editItem }) => {
+
   
   return (
     <div className="single-item">
       <input
         type="checkbox"
         checked={item.completed}
-        onChange={() => editItem(item.id)}
+        onChange={() => editItem(item)}
       />
       <p
         style={{

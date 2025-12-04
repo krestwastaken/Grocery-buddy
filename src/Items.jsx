@@ -2,6 +2,8 @@ import React from "react";
 import SingleItem from "./SingleItem";
 
 const Items = ({ items, removeItem, editItem }) => {
+  console.log(items);
+  
   return (
     <div className="items">
       {items.map((item) => {
